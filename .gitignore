@@ -1,6 +1,11 @@
-HELP.md
+# Ignore target directory but include JAR files
 target/
+!target/*.jar
+
+# Exclude Maven wrapper jar
 !.mvn/wrapper/maven-wrapper.jar
+
+# Allow the target directory within src/main and src/test
 !**/src/main/**/target/
 !**/src/test/**/target/
 
