@@ -1,14 +1,12 @@
-# Use an official Java runtime as a parent image
-FROM openjdk:17-jdk-slim
-
-# Set the working directory in the container
+# Stage 1: Build the application
+FROM maven:3.8.6-openjdk-17 AS build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Copy the compiled JAR file from the target directory to the container
-COPY target/RuleEngineAST-0.0.1-SNAPSHOT.jar app.jar
-
-# Expose the port the app runs on (default Spring Boot port is 8080)
+# Stage 2: Run the application
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY --from=build /app/target/RuleEngineAST-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
-
-# Run the application
 CMD ["java", "-jar", "app.jar"]
