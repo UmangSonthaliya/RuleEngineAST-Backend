@@ -4,7 +4,7 @@ FROM openjdk:17-jdk-slim
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the compiled JAR file from your local machine to the container
+# Copy the compiled JAR file from the target directory to the container
 COPY target/RuleEngineAST-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose the port the app runs on (default Spring Boot port is 8080)
